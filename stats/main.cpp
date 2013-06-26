@@ -7,7 +7,7 @@
 using namespace std;
 
 bool test (stats a, stats b);
-double speedup(unsigned int length, int numIter);
+void speedup(unsigned int length, int numIter);
 void alternateSize (int maxSize);
 void alternateThreads(int maxThreads);
 
@@ -17,7 +17,7 @@ int main(int argc,char **argv)
 
     double data[length];
 
-    for (int i = 0; i < length; i++)
+    for (unsigned int i = 0; i < length; i++)
         data[i] = (double)rand() / RAND_MAX;
 
     stats sStat = sStats (data, length);
@@ -40,7 +40,7 @@ void alternateThreads (int maxThreads)
     unsigned int length = 1000;
     double data[length];
 
-    for (int i = 0; i < length; i++)
+    for (unsigned int i = 0; i < length; i++)
         data[i] = (double)rand() / RAND_MAX;
 
     temp = omp_get_wtime();
@@ -49,7 +49,7 @@ void alternateThreads (int maxThreads)
 
     for (int i = 0; i < maxThreads; i++)
     {
-        for (int j = 0; j < length; j++)
+        for (unsigned int j = 0; j < length; j++)
             data[j] = (double)rand() / RAND_MAX;
         omp_set_num_threads(i);
         temp = omp_get_wtime();
@@ -101,7 +101,7 @@ bool test (stats a, stats b)
     return ret;
 }
 
-double speedup (unsigned int length, int numIter)
+void speedup (unsigned int length, int numIter)
 {
     double sTime = 0.0, pTime = 0.0, sUp = 0.0, temp; 
     stats tempStat;
@@ -109,14 +109,14 @@ double speedup (unsigned int length, int numIter)
 
     for (int i = 0; i < numIter; i++)
     {
-        for (int i = 0; i < length; i++)
+        for (unsigned int i = 0; i < length; i++)
             data[i] = (double)rand() / RAND_MAX;
 
         temp = omp_get_wtime();
         tempStat = sStats(data, length);
         sTime = (omp_get_wtime() - temp);
 
-        for (int i = 0; i < length; i++)
+        for (unsigned int i = 0; i < length; i++)
             data[i] = (double)rand() / RAND_MAX;
 
         temp = omp_get_wtime();

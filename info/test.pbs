@@ -1,0 +1,50 @@
+#!/bin/sh
+### Job name
+#PBS -N test
+### Declare job non-rerunable
+#PBS -r n
+### Output files
+#PBS -e test.err
+#PBS -o test.log
+### Mail to user
+#PBS -m ae
+### Queue name (small, medium, long, verylong)
+#PBS -q long
+### Request 2 nodes with 4 Cores each
+#PBS -l nodes=1:ppn=16
+
+###########################################################
+###                Some basic commands                  ###
+
+###########################################################
+###  This job's working directory
+echo Working directory is $PBS_O_WORKDIR
+cd $PBS_O_WORKDIR    
+
+echo Running on host `hostname`
+echo Time is `date`
+echo Directory is `pwd`
+###########################################################
+
+
+###########################################################
+### This section should be included if using MPI for IB ###
+###########################################################
+export NODES_FILE=${PBS_JOBNAME}.nodes.ib
+cat $PBS_NODEFILE |sed "s|^n|iN|g" > $NODES_FILE
+NPROCS=`wc -l < $PBS_NODEFILE`
+###########################################################
+
+###  To use GCC 4.6.3
+module load  gcc/gcc-4.6.3
+
+###  By default OpenMPI 
+echo This job has allocated $NPROCS nodes
+
+g++ -fopenmp info.cpp -o info
+
+# Run the parallel OpenMP executable "info"
+./info
+
+
+

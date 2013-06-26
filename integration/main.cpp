@@ -7,9 +7,9 @@
 
 using namespace std;
 
-double sTrapezoid(double a, double b, unsigned int imax);
+double sTrapezoid(double a, double b, unsigned int numsteps);
 bool test (double a, double b);
-double speedup (double a, double b, unsigned int imax, int numIter);
+double speedup (double a, double b, unsigned int numsteps, int numIter);
 void alternateSize (int maxSize);
 void alternateThreads(int maxThreads);
 
@@ -62,17 +62,17 @@ void alternateSize (int maxSize)
     }
 }
 
-double speedup (double a, double b, unsigned int imax, int numIter)
+double speedup (double a, double b, unsigned int numsteps, int numIter)
 {
     double sTime = 0.0, pTime = 0.0, sUp = 0.0, temp, tempVal; 
     for (int i = 0; i < numIter; i++)
     {
         temp = omp_get_wtime();
-        tempVal = sTrapezoid(a, b, imax);
+        tempVal = sTrapezoid(a, b, numsteps);
         sTime = (omp_get_wtime() - temp);
 
         temp = omp_get_wtime();
-        tempVal = pTrapezoid (a, b, imax);
+        tempVal = pTrapezoid (a, b, numsteps);
         pTime = pTime + (omp_get_wtime() - temp);
     }
 
@@ -95,18 +95,18 @@ bool test (double a, double b)
     return true;
 }
 
-double sTrapezoid(double a, double b, unsigned int imax)
+double sTrapezoid(double a, double b, unsigned int numsteps)
 {
   double r = 0.0;
   double x = a;
-  double h = (b - a) / (double)imax;
+  double h = (b - a) / (double)numsteps;
 
-  for (unsigned int i = 1; i < imax; i++)
+  for (unsigned int i = 1; i < numsteps; i++)
   {
     x += h;
     r += f(x);
   }
 
-  r = (r + (f(a) + f(b)) / 2.0) * (b - a) / (double)imax;
+  r = (r + (f(a) + f(b)) / 2.0) * (b - a) / (double)numsteps;
   return r;
 }

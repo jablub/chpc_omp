@@ -7,7 +7,7 @@
 
 int sMatrixMult(float* matrixA, int Am, int An, float* matrixB, int Bm, int Bn, float* restltMatrix );
 int matrixEquil(float *matrixA, float *matrixB, int m, int n);
-double speedup (int Am, int An, int Bm, int Bn, int numIter);
+void speedup (int Am, int An, int Bm, int Bn, int numIter);
 void alternateSize (int maxSize);
 void alternateThreads(int maxThreads);
 
@@ -86,8 +86,9 @@ void alternateSize (int maxSize)
 }
 
 
-double speedup (int Am, int An, int Bn, int Bm, int numIter)
+void speedup (int Am, int An, int Bn, int Bm, int numIter)
 {
+
     double sTime = 0.0, pTime = 0.0, sUp = 0.0, temp;
     float* A = new float[Am * An];
     float* B = new float[Bm * Bn]; 

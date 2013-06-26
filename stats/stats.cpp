@@ -19,7 +19,7 @@ stats sStats(double array[], unsigned int length)
   myStats.stdDev = 0;
 
   // First iteration, find min, max and sum
-  for (int i = 0; i < length; i++ )
+  for (unsigned int i = 0; i < length; i++ )
   {
     myStats.sum += array[i];
 
@@ -35,7 +35,7 @@ stats sStats(double array[], unsigned int length)
 
   //second pass to calculate sum of squared differences from the mean
   double sumSqurs = 0;
-  for (int i = 0; i < length; i++ )
+  for (unsigned int i = 0; i < length; i++ )
     sumSqurs += (  myStats.mean - array[i] ) * (  myStats.mean - array[i] ) ;
 
   // Now calculate the standard deviation
@@ -59,7 +59,7 @@ stats pStats(double array[], unsigned int length)
 
   // First iteration, find min, max and sum
   //TODO: Parallelise this step
-  for (int i = 0; i < length; i++ )
+  for (unsigned int i = 0; i < length; i++ )
   {
     myStats.sum += array[i];
 
@@ -76,7 +76,7 @@ stats pStats(double array[], unsigned int length)
   //second pass to calculate sum of squared differences from the mean
   double sumSqurs = 0;
   //TODO: Parallelise this loop
-  for (int i = 0; i < length; i++ )
+  for (unsigned int i = 0; i < length; i++ )
     sumSqurs += (  myStats.mean - array[i] ) * (  myStats.mean - array[i] ) ;
 
   // Now calculate the standard deviation

@@ -11,12 +11,12 @@ double f(double x)
   return x;
 }
 
-// This is a parelle implimentaion of the Trapezoidal rule.
+// This is a parallel implementation of the Trapezoidal rule.
 double pTrapezoid(double a, double b, unsigned int imax)
 {
   //f(a) will return, well f(a)  function pointers for the win!
-  // TODO: You must implment this section, first so it validates
-  // Then optamise it to run in parellel
+  // TODO: You must implement this section, first so it validates
+  // Then optimise it to run in parallel
 
-  return f(a); // This will return f(a) for the function you specifyed in setFunction.  This is just an example, this will NOT validate
+  return f(a); // This is just an example, this will NOT validate.
 }

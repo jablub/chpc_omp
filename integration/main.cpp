@@ -9,7 +9,7 @@ using namespace std;
 
 double sTrapezoid(double a, double b, unsigned int numsteps);
 bool test (double a, double b);
-double speedup (double a, double b, unsigned int numsteps, int numIter);
+void speedup (double a, double b, unsigned int numsteps, int numIter);
 void alternateSize (int maxSize);
 void alternateThreads(int maxThreads);
 
@@ -62,7 +62,7 @@ void alternateSize (int maxSize)
     }
 }
 
-double speedup (double a, double b, unsigned int numsteps, int numIter)
+void speedup (double a, double b, unsigned int numsteps, int numIter)
 {
     double sTime = 0.0, pTime = 0.0, sUp = 0.0, temp, tempVal; 
     for (int i = 0; i < numIter; i++)
@@ -84,7 +84,7 @@ double speedup (double a, double b, unsigned int numsteps, int numIter)
     printf("The serial execution took %f seconds.\n", sTime);
     printf("The parallel execution took %f seconds.\n", pTime);
     printf("That's a speed up of %f.\n", sUp);
-    return sUp;
+    //return sUp;
 }
 
 bool test (double a, double b)

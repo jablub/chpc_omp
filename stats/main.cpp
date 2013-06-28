@@ -15,7 +15,7 @@ int main(int argc,char **argv)
 {
     unsigned int length = 1000;
 
-    double data[length];
+    double* data = new double[length];
 
     for (unsigned int i = 0; i < length; i++)
         data[i] = (double)rand() / RAND_MAX;
@@ -32,13 +32,15 @@ int main(int argc,char **argv)
     {
         printf("OH NO, your parallel results are not verified\n");
     }
+
+	while(1);
 }
 
 void alternateThreads (int maxThreads)
 {
     double temp, pTime, sTime, sUp;
     unsigned int length = 1000;
-    double data[length];
+    double* data = new double[length];
 
     for (unsigned int i = 0; i < length; i++)
         data[i] = (double)rand() / RAND_MAX;
@@ -105,7 +107,7 @@ void speedup (unsigned int length, int numIter)
 {
     double sTime = 0.0, pTime = 0.0, sUp = 0.0, temp; 
     stats tempStat;
-    double data[length];
+    double* data = new double[length];
 
     for (int i = 0; i < numIter; i++)
     {

@@ -85,17 +85,17 @@ bool test (stats a, stats b)
         ret = false;
         printf ("Serial max = %f != %f = parallel max\n", a.min, b.min);
     }
-    if (abs(a.sum - b.sum) > 10e-12)
+    if (abs(a.sum - b.sum) > 10e-5)
     {
         ret = false;
         printf ("Serial sum = %f != %f = parallel sum\n", a.sum, b.sum);
     }
-    if (abs(a.mean - b.mean) > 10e-12)
+    if (abs(a.mean - b.mean) > 10e-5)
     {
         ret = false;
         printf ("Serial mean = %f != %f = parallel mean\n", a.mean, b.mean);
     }
-    if (abs(a.stdDev - b.stdDev) > 10e-12)
+    if (abs(a.stdDev - b.stdDev) > 10e-5)
     {
         ret = false;
         printf ("Serial stdDev = %f != %f = parallel stdDev\n", a.stdDev, b.stdDev);

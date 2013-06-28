@@ -17,6 +17,8 @@ int main(int argc,char **argv)
 	// Call the printOmpInfo method
 	printOmpInfo();  // Uncomment this line to run OMP code
 
+	while(1);
+
 	return 0;
 }
 
@@ -43,7 +45,7 @@ void printOmpInfo()
 	printf("This is thread number %i.\n", thread_num );
 
 	//TODO 1.4: Change the number of threads
-	omp_set_num_threads(4);
+	omp_set_num_threads(20);
 
 	printf("\nStart parallel execution...\n");
 

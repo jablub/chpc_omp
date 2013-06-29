@@ -29,9 +29,21 @@ int pMatrixMult( float* matrixA, int Am, int An, float* matrixB, int Bm, int Bn,
   //matrixA[y*Am + x] = ym;         // assign value
 
   //TODO: Implement matrix multiplication and parallelise it
-
+ 
+  #pragma omp parallel 
+  {  
+	  #pragma omp for
+	  for ( int y = 0; y < Am; y++ )
+	  {
+		for ( int x = 0; x < Bn; x++ )
+		{
+		  restltMatrix[y*Bn + x] = 0.0f;
+		  for ( int z = 0; z < An; z++ )
+			restltMatrix[y*Bn + x] = restltMatrix[y*Bn + x] + matrixA[y*An + z] * matrixB[z*Bn + x];
+		}
+	  }
+  }
 
   return 0;
 }
-
 

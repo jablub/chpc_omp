@@ -92,6 +92,12 @@ void speedup (int Am, int An, int Bn, int Bm, int numIter)
     float* A = new float[Am * An];
     float* B = new float[Bm * Bn]; 
     float* C = new float[Am * Bn];
+
+    float* AA = new float[Am * An];
+    float* BB = new float[Bm * Bn]; 
+    float* CC = new float[Am * Bn];
+
+    temp = omp_get_wtime();
     for (int i = 0; i < numIter; i++)
     {
         for (int i = 0; i < Am * An; i++)
@@ -99,19 +105,21 @@ void speedup (int Am, int An, int Bn, int Bm, int numIter)
         for (int i = 0; i < Bm * Bn; i++)
             B[i] = (float)rand() / RAND_MAX;
 
-        temp = omp_get_wtime();
-        sMatrixMult(A, Am, An, B, Bm, Bn, C);
-        sTime = (omp_get_wtime() - temp);
+        pMatrixMult (A, Am, An, B, Bm, Bn, C);        
+	}
+	pTime = pTime + (omp_get_wtime() - temp);		
 
-        for (int i = 0; i < Am * An; i++)
-            A[i] = (float)rand() / RAND_MAX;
+	temp = omp_get_wtime();
+    for (int i = 0; i < numIter; i++)
+    {
+		for (int i = 0; i < Am * An; i++)
+            AA[i] = (float)rand() / RAND_MAX;
         for (int i = 0; i < Bm * Bn; i++)
-            B[i] = (float)rand() / RAND_MAX;
+            BB[i] = (float)rand() / RAND_MAX;
 
-        temp = omp_get_wtime();
-        pMatrixMult (A, Am, An, B, Bm, Bn, C);
-        pTime = pTime + (omp_get_wtime() - temp);
+		sMatrixMult(AA, Am, An, BB, Bm, Bn, CC);
     }
+	sTime = (omp_get_wtime() - temp);
 
     sTime = sTime / numIter;
     pTime = pTime / numIter;
